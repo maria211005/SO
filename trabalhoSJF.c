@@ -34,23 +34,22 @@ int lendoArq(const char *nomeArq, Processo processos[], int *quantidade){
     //lendo a linha com os nomes 
     fgets(linha, sizeof(linha), arquivo); //pegando a linha
     linha[strcspn(linha, "\n")] = 0; //removendo o \n do final da string
-    strtok(linha, ","); //função p/ quebrar a string em tokens 
-    printf(linha);
-    char *token = strtok(NULL, ","); //pega cada nome
+    strtok(linha, " "); //função p/ quebrar a string em tokens 
+    char *token = strtok(NULL, " "); //pega cada nome
     while(token != NULL){
         
         strcpy(processos[i].nome, token); //copiando o token pro nome do respectivo processo
         i++; 
-        token = strtok(NULL, ","); //passando pro prox nome
+        token = strtok(NULL, " "); //passando pro prox nome
     }
     //a gente descobre quantos processos tem por meio do contador (i++) e passa pra um ponteiro
     *quantidade = i;
     
     //lendo a linha com os tempos de execução 
     fgets(linha, sizeof(linha), arquivo); //pegando a linha
-    strtok(linha, ","); //quebrando em tokens
+    strtok(linha, " "); //quebrando em tokens
     for(int j = 0; j < *quantidade; j++){
-        token = strtok(NULL, ","); 
+        token = strtok(NULL, " "); 
         //funcao atoi --> transforma string em int 
         processos[j].tempo_execucao = atoi(token); 
         processos[j].tempo_restante = processos[j].tempo_execucao;
@@ -58,9 +57,9 @@ int lendoArq(const char *nomeArq, Processo processos[], int *quantidade){
 
     //lendo a linha com os tempos de chegada 
     fgets(linha, sizeof(linha), arquivo); 
-    strtok(linha, ","); //quebrando dnv em tokens
+    strtok(linha, " "); //quebrando dnv em tokens
     for(int j = 0; j < *quantidade; j++){
-        token = strtok(NULL, ","); 
+        token = strtok(NULL, " "); 
         processos[j].tempo_chegada = atoi(token); 
         processos[j].tempo_inicio = 0; 
     }
@@ -169,7 +168,7 @@ int main(){
     int quantidade = 0; 
 
     //msg de erro caso o arquivo não abra 
-    if(!lendoArq("processos.csv", processos, &quantidade)){
+    if(!lendoArq("entrada.txt", processos, &quantidade)){
         printf("erro ao abrir o arquivo!\n"); 
         return 1; 
     }
