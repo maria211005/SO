@@ -109,7 +109,7 @@ void SJF_preemptivo(Processo processos[], int quantidade){
 
             //imprime mudança apenas se o processo for novo
             if(ultimo != menor){
-                printf("%d|---------%s---------|", tempo, processos[menor].nome); 
+                printf("|%d|---------%s---------", tempo, processos[menor].nome); 
                 ultimo = menor; 
             }
 
@@ -122,13 +122,13 @@ void SJF_preemptivo(Processo processos[], int quantidade){
             }
         }else{
             //se nao tiver nenhum processo pronto ele add +1 no tempo
-            if(ultimo != -1) printf("%d|", tempo);
+            if(ultimo != -1) 
             ultimo = -1; 
         }
 
         tempo++;
     }
-    printf("%d\n", tempo); //imprime o fim do processo
+    printf("|%d|\n", tempo); //imprime o fim do processo
 
     //impressao dos resultados
     //tempo de espera: 
@@ -175,12 +175,19 @@ int main(){
     //exibindo os dados lidos
     printf("Processos na fila do SJF:\n");
     for(int i = 0; i < quantidade; i++){
-        printf("%s: tempo: %d    chegada: %d\n", 
-        processos[i].nome, processos[i].tempo_execucao, processos[i].tempo_chegada); 
+        printf("%s  ", processos[i].nome); 
+    }
+    printf("\n\nTempo de CPU requerida pelos processos:\n");
+    for(int i = 0; i < quantidade; i++){
+        printf("%d  ", processos[i].tempo_execucao); 
+    }
+    printf("\n\nTempo de chegada dos processos:\n");
+    for(int i = 0; i < quantidade; i++){
+        printf("%d  ", processos[i].tempo_chegada);
     }
 
     //SJF PREEMPTIVO 
-    printf("\n\n\n\nLINHA DO TEMPO:\n\n");
+    printf("\n\n\n\n\nLINHA DO TEMPO:\n\n");
     SJF_preemptivo(processos, quantidade); 
 
     return 0; 
