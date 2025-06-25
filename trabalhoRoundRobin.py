@@ -16,7 +16,7 @@ class Queue:
         return len(self.items)
 
 def recebeArquivo():
-    with open('processos.csv', 'r') as arquivo:
+    with open('output/processos.csv', 'r') as arquivo:
         #recebe cada processo por linha e armazena no arq
         for linha in arquivo:
             p = linha.strip().split(',')
